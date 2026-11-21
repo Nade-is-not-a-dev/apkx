@@ -193,6 +193,7 @@ public final class Tools {
 
     private static File writeInput(JSONObject a) throws Exception {
         String b64 = a.optString("contentB64", "");
+        if (b64.isEmpty()) b64 = a.optString("apk", "");
         String path = a.optString("path", "");
         if (!b64.isEmpty()) {
             byte[] data = Base64.decode(b64, Base64.DEFAULT);

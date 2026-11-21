@@ -62,7 +62,9 @@ public final class ApkEngine {
                 apktoolMain.invoke(null, (Object) args);
             } catch (InvocationTargetException e) {
                 Throwable cause = e.getCause() == null ? e : e.getCause();
-                throw new Exception("apktool gagal: " + cause, cause);
+                java.io.StringWriter sw = new java.io.StringWriter();
+                cause.printStackTrace(new java.io.PrintWriter(sw));
+                throw new Exception("apktool gagal: " + sw.toString(), cause);
             }
         } finally {
             System.setOut(oldOut);
